@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom'
+import Sidebar from './Components/Sidebar';
+import Home from './Components/Home';
+import About from './Components/About';
+import Contact from './Components/Contact';
+import Resume from './Components/Resume';
+import Testimonial from './Components/Testimonial';
+import Works from './Components/Works';
+import { useState } from 'react'
 
 function App() {
+
+  const [mode,  setMode] = useState(true)
+
+  const View = (e) => {
+    setMode(e)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Sidebar View={View} mode={mode} />
+      <Routes>
+        <Route exact path="/" element={<Home dark={mode} />} />
+        <Route exact path="/about" element={<About />} />
+        <Route exact path="/resume" element={<Resume />} />
+        <Route exact path="/testimonial" element={<Testimonial />} />
+        <Route exact path="/works" element={<Works />} />
+        <Route exact path="/contact" element={<Contact />} />
+      </Routes>
     </div>
   );
 }
